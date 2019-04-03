@@ -1,0 +1,11 @@
+# Node dependencies
+node_modules
+*.log
+# GCP
+.gcloudignore
+
+# Application configuration file
+config.json
+
+# misc
+.DS_Store
