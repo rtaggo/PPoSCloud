@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/', (req, res) => {
-  res.status(200).json({message: 'Hello, world!'});
+app.get('/status', (req, res) => {
+  res.status(200).json({message: 'Welcome to Predictive PoS Cloud!'});
 });
 
 // Basic 404 handler
