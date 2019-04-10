@@ -1,16 +1,3 @@
-// Copyright 2017, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 'use strict';
 
 // Hierarchical node.js configuration with command-line arguments, environment
@@ -18,6 +5,13 @@
 const nconf = (module.exports = require('nconf'));
 const path = require('path');
 
+let sampleConfigJSON = `{
+  "GCLOUD_PROJECT" : "AGCLOUD_PROJECT_NAME",
+  "MONGOUSERNAME": "YOUR_MONGOUSERNAME",
+  "MONGOPWD" : "YOUR_MONGOPASSWORD",
+  "MONGOCLUSTER" : "YOUR_MONGOCLUSTERURL",
+  "JWTSECRET":"YOURJWTSECRETKEY"
+}`;
 nconf
   // 1. Command-line arguments
   .argv()
@@ -25,7 +19,9 @@ nconf
   .env([
     'GCLOUD_PROJECT',
     'GEOSERVICE',
-    'MONGODB',
+    'MONGOUSERNAME',
+    'MONGOPWD',
+    'MONGOCLUSTER'
   ])
   // 3. Config file
   .file({file: path.join(__dirname, 'config.json')})
@@ -38,11 +34,15 @@ nconf
   });
 
 // Check for required settings
-checkConfig('GCLOUD_PROJECT');
-checkConfig('MONGODB');
+checkConfig('GCLOUD_PROJECT', sampleConfigJSON);
+checkConfig('MONGOUSERNAME', sampleConfigJSON);
+checkConfig('MONGOPWD', sampleConfigJSON);
+checkConfig('MONGOCLUSTER', sampleConfigJSON);
 
-function checkConfig(setting) {
+function checkConfig(setting, detailsMessage) {
   if (!nconf.get(setting)) {
+    console.log(`You must set ${setting} as an environment variable or in config.json!`);
+    console.log(`config.json Sample: ${detailsMessage}`);
     throw new Error(
       `You must set ${setting} as an environment variable or in config.json!`
     );
