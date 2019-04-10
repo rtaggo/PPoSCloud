@@ -12,7 +12,7 @@ const _getMongDOURI = () => {
 }
 const _connectToDB = async () => {  
   let mongoDBURI = _getMongDOURI();
-  console.log(`Mongo DB URI: ${mongoDBURI}`);
+  //console.log(`Mongo DB URI: ${mongoDBURI}`);
   try {
       await mongoose.connect(mongoDBURI, { useNewUrlParser: true,useCreateIndex: true });
       console.log('Connected to Mongo DB:-)');

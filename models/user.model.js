@@ -6,7 +6,7 @@ const config = require('../config');
 var userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: 'Full name can\'t be empty'
+    required: 'name can\'t be empty'
   },
   email: {
     type: String,
@@ -16,7 +16,7 @@ var userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: 'Password can\'t be empty',
-    minlength: [4, 'Password must be atleast 4 character long']
+    minlength: [6, 'Password must be atleast 4 character long']
   },
   date: {
     type: Date,
