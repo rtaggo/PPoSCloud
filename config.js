@@ -21,7 +21,8 @@ nconf
     'GEOSERVICE',
     'MONGOUSERNAME',
     'MONGOPWD',
-    'MONGOCLUSTER'
+    'MONGOCLUSTER',
+    'JW_EXPIRESIN'
   ])
   // 3. Config file
   .file({file: path.join(__dirname, 'config.json')})
@@ -31,6 +32,7 @@ nconf
     GCLOUD_PROJECT: '',
     GEOSERVICE:'openrouteservice',
     PORT: 8080,
+    JW_EXPIRESIN:120
   });
 
 // Check for required settings
